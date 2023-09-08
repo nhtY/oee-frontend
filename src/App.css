@@ -1,5 +1,5 @@
 .bg-bellona {
-  background-color: #097A83;
+  background-color: hsl(182.07deg 100% 22.75%); /* #097A83; */
 }
 
 .App {
@@ -62,6 +62,8 @@ main {
 #lower {
   /* height: calc( (100vh - 4.6vmin) * 0.58); */
   height: 70%;
+  min-height: 300px;
+  min-width: 200px;
 }
 
 /* FLIP CARD ANIMATION - START */
