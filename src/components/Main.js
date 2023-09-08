@@ -1,10 +1,16 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import FlipCardBack from "./FlipCardBack";
 import FlipCardFront from "./FlipCardFront";
 import UpperContent from "./UpperContent";
 
 
 function Main() {
+
+    const [currentFace, setFace] = useState("front");
+
+    useEffect(()=> {
+        flipStarter(currentFace, setFace);
+    }, [currentFace])
 
     return (
         <main>
@@ -34,3 +40,25 @@ function Main() {
 }
 
 export default Main;
+
+
+
+function flipStarter(currentFace, setFace) {
+    console.log("Flip Starter invoked...");
+
+    const inner_card = document.getElementById("rotating");
+
+    setTimeout(()=> {
+        console.log("Flipping...");
+
+        if(currentFace === 'front') {
+            inner_card.style.transform = "rotateX(180deg)";
+            setFace('back')
+        }else {
+            inner_card.style.transform = "rotateX(0deg)";
+            setFace('front')
+        }
+
+    }, 3000);
+
+}
