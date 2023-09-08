@@ -70,7 +70,7 @@ main {
 
 .flip-card {
   background-color: transparent;
-  perspective: 90vw;
+  perspective: calc(100vw + 400px);
 }
 
 .flip-card-inner {
