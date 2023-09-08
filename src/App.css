@@ -1,3 +1,7 @@
+.bg-bellona {
+  background-color: #097A83;
+}
+
 .App {
   /* text-align: center; */
 }
@@ -23,7 +27,7 @@ nav {
 
 .nav-text {
   font-family: Inter;
-  font-size: 4vmin;
+  font-size: 3vmin;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
@@ -31,4 +35,105 @@ nav {
 
 .img-responsive {
   height: 2.8vmin;
+}
+
+@media screen and (max-width: 425px){
+  .nav-text {
+    font-size: 4vmin;
+  }
+}
+
+
+main {
+  height: calc(100vh - 5vmin);
+  max-height: calc(100vh - 40px);
+}
+
+#upper {
+  /* height: calc( (100vh - 4.6vmin) * 0.38); */
+  height: 30%;
+}
+
+#upper h1 {
+  font-size: 5vmin;
+  font-weight: bold;
+}
+
+#lower {
+  /* height: calc( (100vh - 4.6vmin) * 0.58); */
+  height: 70%;
+}
+
+/* FLIP CARD ANIMATION - START */
+
+.flip-card {
+  background-color: transparent;
+  perspective: 90vw;
+}
+
+.flip-card-inner {
+  position: relative;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+/* .flip-card:hover .flip-card-inner {
+  transform: rotateX(180deg);
+} */
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.flip-card-back {
+  background-color: #2980b9;
+  color: white;
+  transform: rotateX(180deg);
+}
+
+/* FLIP CARD ANIMATION - END */
+
+.type {
+  font-size: 5vmin;
+  font-weight: bold;
+
+  display: inline-block;
+  width: 70%;
+  text-align: start;
+}
+
+.type-long {
+  font-size: 3.5vmin;
+}
+
+.value {
+  font-size: 5.0vmin;
+  font-weight: bold;
+
+  display: inline-block;
+  width: 30%;
+  text-align: end;
+}
+
+.divider {
+  /* width: 90%; */
+  /* margin: 4px auto 4px auto; */
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid white;
+  box-shadow: 0px 0px 4px 2px rgba(255, 252, 252, 0.70);
+}
+
+@media only screen and (min-width: 1025px) {
+  /* #upper h1 {
+      font-size: 4.0vw;
+  }
+
+  .type, .type-long, .value {
+      font-size: 4.0vw;
+  } */
 }
