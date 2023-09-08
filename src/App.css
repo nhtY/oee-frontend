@@ -4,12 +4,31 @@
 
 
 .App-header {
-  background-color: #282c34;
+  /* background-color: #282c34; */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  /* align-items: center;
+  justify-content: center; */
+  /* font-size: calc(10px + 2vmin); */
+  /* color: white; */
+}
+
+nav {
+  height: 5vmin;
+  min-height: 40px;
+  background: #095E65;
+  flex-shrink: 0;
+}
+
+.nav-text {
+  font-family: Inter;
+  font-size: 4vmin;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.img-responsive {
+  height: 2.8vmin;
 }
