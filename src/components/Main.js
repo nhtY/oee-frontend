@@ -49,6 +49,8 @@ function flipStarter(currentFace, setFace) {
     const inner_card = document.getElementById("rotating");
     const back_face = document.getElementById("back-face");
 
+    const timeOut = currentFace === 'front' ? 10000 : 3000;
+
     setTimeout(()=> {
         console.log("Flipping...");
 
@@ -68,6 +70,6 @@ function flipStarter(currentFace, setFace) {
             setFace('front')
         }
 
-    }, 3000);
+    }, timeOut);
 
 }
