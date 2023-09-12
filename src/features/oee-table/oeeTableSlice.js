@@ -3,10 +3,14 @@ import {getCurrentOeeTableData} from '../../api-consumer/oeeTableDataConsumer';
 
 
 // create Asynchron Thunk for fetching current oee data:
-export const fetchCurrentOee = createAsynchThunk(
+export const fetchCurrentOee = createAsyncThunk(
     'table/fetch-current-oee-data',
     async () => {
-        return getCurrentOeeTableData();
+        return getCurrentOeeTableData()
+        .then(response => response)
+        .catch(err => {
+            throw err;
+        });
     }
 );
 
@@ -30,7 +34,7 @@ const tableSlice = createSlice({
 
         // =========== FETCH CURRENT OEE DATA ==========
         builder.addCase(fetchCurrentOee.fulfilled, (state, action) => {
-            state.data = action.payload;
+            state.currentOeeData = action.payload;
             state.fetching = 'idle';
             state.fetchTriggered = false;
         })
