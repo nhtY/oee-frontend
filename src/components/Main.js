@@ -7,6 +7,7 @@ import {useAppSelector, useAppDispatch} from '../app/hooks';
 import { OEE_DATA_FETCH_INTERVAL } from "../constants/fetchIntervals";
 import {fetchCurrentOee} from '../features/oee-table/oeeTableSlice';
 import Spinner from "./Spinner";
+import ErrorMessage from "./ErrorMessage";
 
 function Main() {
 
@@ -31,15 +32,16 @@ function Main() {
     },[timer, fetchCurrentTriggered, fetchCurrentStatus]);
 
     useEffect(()=> {
-        flipStarter(currentFace, setFace, timer, setTimer);
-    }, [currentFace])
+        if(fetchCurrentError === null) {
+            console.log("flip starter HERE CALLED")
+            flipStarter(currentFace, setFace, timer, setTimer);
+        }
+    }, [currentFace, fetchCurrentError])
 
-
-    console.log("Current data: ", currentOeeData);
 
     return (
         <main>
-            {(fetchCurrentStatus=== 'fetching' && currentOeeData=== null)? <Spinner /> : 
+            {(fetchCurrentStatus=== 'fetching' && currentOeeData=== null)? <Spinner /> : fetchCurrentError? <ErrorMessage error={fetchCurrentError} /> :
             
             (
                 <div className="h-100 container-fluid">
