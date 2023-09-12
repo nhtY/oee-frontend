@@ -3,39 +3,71 @@ import FlipCardBack from "./FlipCardBack";
 import FlipCardFront from "./FlipCardFront";
 import UpperContent from "./UpperContent";
 import { BACK_FACE_TIME, FRONT_FACE_TIME } from "../constants/flipFaceTime";
-
+import {useAppSelector, useAppDispatch} from '../app/hooks';
+import { OEE_DATA_FETCH_INTERVAL } from "../constants/fetchIntervals";
+import {fetchCurrentOee} from '../features/oee-table/oeeTableSlice';
+import Spinner from "./Spinner";
 
 function Main() {
 
+    const fetchCurrentStatus = useAppSelector(state => state.table.fetching);
+    const fetchCurrentError = useAppSelector(state => state.table.error);
+    const fetchCurrentTriggered = useAppSelector(state => state.table.fetchTriggered);
+    const currentOeeData = useAppSelector(state => state.table.currentOeeData);
+
+    const [timer, setTimer] = useState(0);
+
+    const dispatch = useAppDispatch();
+
     const [currentFace, setFace] = useState("front");
 
+    useEffect(() => {
+
+        if(timer <= 0 && fetchCurrentStatus === 'idle') {
+            dispatch(fetchCurrentOee());
+            setTimer(OEE_DATA_FETCH_INTERVAL);
+        }
+
+    },[timer, fetchCurrentTriggered, fetchCurrentStatus]);
+
     useEffect(()=> {
-        flipStarter(currentFace, setFace);
+        flipStarter(currentFace, setFace, timer, setTimer);
     }, [currentFace])
+
+
+    console.log("Current data: ", currentOeeData);
 
     return (
         <main>
-            <div className="h-100 container-fluid">
+            {(fetchCurrentStatus=== 'fetching' && currentOeeData=== null)? <Spinner /> : 
+            
+            (
+                <div className="h-100 container-fluid">
 
-                {/* <!-- Upper Content --> */}
-                <div id="upper" className="row py-3 justify-content-center">
-                    <div className="col-10">
-                        <UpperContent />
+                    {/* <!-- Upper Content --> */}
+                    <div id="upper" className="row py-3 justify-content-center">
+                        <div className="col-10">
+                            <UpperContent data={currentOeeData} />
+                        </div>
+                    </div>
+                    
+                    {/* <!-- Lower Content --> */}
+                    <div id="lower" className="row pb-3 justify-content-center flip-card">
+                        <div id="rotating" className="col-10 flip-card-inner">
+                            {/* <!-- flip-card-front --> */}
+                            <FlipCardFront data={currentOeeData} />
+
+                            {/* <!-- flip-card-back --> */}
+                            <FlipCardBack />
+
+                        </div>
                     </div>
                 </div>
+            )
+            
+            }
 
-                {/* <!-- Lower Content --> */}
-                <div id="lower" className="row pb-3 justify-content-center flip-card">
-                    <div id="rotating" className="col-10 flip-card-inner">
-                        {/* <!-- flip-card-front --> */}
-                        <FlipCardFront />
 
-                        {/* <!-- flip-card-back --> */}
-                        <FlipCardBack />
-
-                    </div>
-                </div>
-            </div>
         </main>
     );
 }
@@ -44,7 +76,7 @@ export default Main;
 
 
 
-function flipStarter(currentFace, setFace) {
+function flipStarter(currentFace, setFace, timer, setTimer) {
     console.log("Flip Starter invoked...");
 
     const inner_card = document.getElementById("rotating");
@@ -70,6 +102,10 @@ function flipStarter(currentFace, setFace) {
             inner_card.style.transform = `rotate${rotationAxis}(0deg)`;
             setFace('front')
         }
+
+        console.log("Timer: ", timer);
+
+        setTimer(timer => timer - timeOut);
 
     }, timeOut);
 

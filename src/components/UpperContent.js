@@ -1,6 +1,6 @@
 
 
-function UpperContent() {
+function UpperContent({data}) {
 
     
     return (
@@ -10,7 +10,7 @@ function UpperContent() {
             <div className="col-5 bg-bellona shadow-lg rounded-4">
                 <div className="row h-100">
                     <div className="col align-self-center">
-                        <h1 className="">% 78,2</h1>
+                        <h1 className="">% {data && data.ggOee}</h1>
                         <h1 className="">GG-OEE</h1>
                     </div>
                 </div>
@@ -20,7 +20,7 @@ function UpperContent() {
             <div className="col-5 bg-bellona shadow-lg rounded-4">
                 <div className="row h-100">
                     <div className="col align-self-center">
-                        <h1 className="">% 81,2</h1>
+                        <h1 className="">% {data && data.goee1s}</h1>
                         <h1 className="">G-OEE-1S</h1>
                     </div>
                 </div>
