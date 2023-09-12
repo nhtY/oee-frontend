@@ -43,7 +43,7 @@ const tableSlice = createSlice({
         builder.addCase(fetchCurrentOee.rejected, (state, action) => {
             state.error = action.error.message;
             state.fetching = 'idle';
-
+            state.fetchTriggered = false;
         })
     }
 });
