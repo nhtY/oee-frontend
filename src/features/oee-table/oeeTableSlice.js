@@ -1,5 +1,14 @@
-import {createSlice} from '@reduxjs/toolkit';
+import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
+import {getCurrentOeeTableData} from '../../api-consumer/oeeTableDataConsumer';
 
+
+// create Asynchron Thunk for fetching current oee data:
+export const fetchCurrentOee = createAsynchThunk(
+    'table/fetch-current-oee-data',
+    async () => {
+        return getCurrentOeeTableData();
+    }
+);
 
 const initialState = {
 
@@ -20,5 +29,21 @@ const tableSlice = createSlice({
     extraReducers: (builder) => {
 
         // =========== FETCH CURRENT OEE DATA ==========
+        builder.addCase(fetchCurrentOee.fulfilled, (state, action) => {
+            state.data = action.payload;
+            state.fetching = 'idle';
+            state.fetchTriggered = false;
+        })
+        builder.addCase(fetchCurrentOee.pending, (state, action) => {
+            state.fetching = 'fetching';
+
+            // while trying another fetch, clear previous error data
+            state.error = null;
+        })
+        builder.addCase(fetchCurrentOee.rejected, (state, action) => {
+            state.error = action.error.message;
+            state.fetching = 'idle';
+
+        })
     }
 });
