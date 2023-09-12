@@ -1,7 +1,24 @@
 import axios from 'axios';
 import { BASE_URL, CURRENT_DATA_PATH } from '../constants/apiUrl';
 
-export const getCurrentOeeTableData = () => {
+
+/*
+
+{
+    "id": 15,
+    "ggOee": 66.91,
+    "ttGp": 5.0,
+    "ttGg": 1.74,
+    "tt1s": 2.22,
+    "redTamir": 15,
+    "farkliUrun": 13,
+    "urunGrubu": 12,
+    "createdAt": "2023-09-12T08:55:48.023069",
+    "goee1s": 71.27
+}
+
+*/
+export const getCurrentOeeTableData = async () => {
    
     console.log("Fetch Current OEE table data in API consumer...");
 
