@@ -28,7 +28,7 @@ export const getCurrentOeeTableData = async () => {
             return response.data;
         }).catch(err => {
             console.log("FETCH current oee table data ERROR: ", err);
-            return err;
+            throw err;
         });
 
 }

@@ -8,9 +8,10 @@ export const fetchCurrentOee = createAsyncThunk(
     async () => {
         return getCurrentOeeTableData()
         .then(response => response)
-        .catch(err => {
-            throw err;
-        });
+        // .catch(err => {
+        //     console.log("ERR: ", err);
+        //     throw err;
+        // });
     }
 );
 
