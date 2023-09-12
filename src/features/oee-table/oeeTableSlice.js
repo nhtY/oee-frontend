@@ -47,3 +47,7 @@ const tableSlice = createSlice({
         })
     }
 });
+
+export const {} = tableSlice.actions;
+
+export default tableSlice.reducer;
