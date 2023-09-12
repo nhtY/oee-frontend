@@ -10,8 +10,8 @@
 .App-header {
   /* background-color: #282c34; */
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  /* display: flex;
+  flex-direction: column; */
   /* align-items: center;
   justify-content: center; */
   /* font-size: calc(10px + 2vmin); */
@@ -131,15 +131,12 @@ main {
 }
 
 @media only screen and (min-width: 1024px) {
-  /* #upper h1 {
-      font-size: 4.0vw;
+  #upper h1 {
+      font-size: 8.0vmin;
   }
 
-  .type, .type-long, .value {
-      font-size: 4.0vw;
-  } */
-
-  .type-long {
-    font-size: 5vmin;
+  .type, .value {
+      font-size: 6.0vmin;
   }
+
 }

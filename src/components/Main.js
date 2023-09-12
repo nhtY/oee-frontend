@@ -49,7 +49,7 @@ function flipStarter(currentFace, setFace) {
     const inner_card = document.getElementById("rotating");
     const back_face = document.getElementById("back-face");
 
-    const timeOut = currentFace === 'front' ? 10000 : 3000;
+    const timeOut = currentFace === 'front' ? 2000 : 2000;
 
     setTimeout(()=> {
         console.log("Flipping...");
@@ -57,7 +57,7 @@ function flipStarter(currentFace, setFace) {
         const screenWidth = window.innerWidth;
         const screenHeight = window.innerHeight;
         
-        const rotateAxis = (screenWidth <= 425 || screenHeight <= 500) ?
+        const rotateAxis = (screenWidth <= 576 || screenHeight < 420) ?
             'Y' : 'X';
 
         back_face.style.transform = `rotate${rotateAxis}(180deg)`; // it is always flipped with regards to the rotation axis.

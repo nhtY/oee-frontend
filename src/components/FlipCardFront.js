@@ -43,7 +43,8 @@ function FlipCardFront() {
             
             {/* <!-- Farklı Ürün --> */}
             <div className="col-sm-5 py-2">
-                <span className="type type-long">Farklı Ürün</span><span className="value">18</span>
+                <span className="type type-long">Farklı Ürün</span>
+                <span className="value">18</span>
             </div>
 
             <div className="col-12 d-block d-sm-none">
