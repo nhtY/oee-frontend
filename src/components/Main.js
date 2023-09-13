@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import FlipCardBack from "./FlipCardBack";
 import FlipCardFront from "./FlipCardFront";
 import UpperContent from "./UpperContent";
@@ -8,15 +8,12 @@ import { OEE_DATA_FETCH_INTERVAL } from "../constants/fetchIntervals";
 import {fetchCurrentOee} from '../features/oee-table/oeeTableSlice';
 import Spinner from "./Spinner";
 import ErrorMessage from "./ErrorMessage";
-import { fetchGraphData } from "../features/oee-graph/oeeGraphSlice";
 
 function Main() {
 
     const fetchCurrentStatus = useAppSelector(state => state.table.fetching);
     const fetchCurrentError = useAppSelector(state => state.table.error);
-    const fetchCurrentTriggered = useAppSelector(state => state.table.fetchTriggered);
     const currentOeeData = useAppSelector(state => state.table.currentOeeData);
-    const graphContent = useAppSelector(state => state.graph.content);
 
     const [timer, setTimer] = useState(0);
     const [isFetch, setIsFetch] = useState(true);
@@ -25,29 +22,38 @@ function Main() {
 
     const [currentFace, setFace] = useState("front");
 
+    const timeOutRef = useRef(null);
+
     useEffect(() => {
         console.log("TIMER: ", timer);
+        
         if(timer <= 0 && fetchCurrentStatus === 'idle' ) {
             dispatch(fetchCurrentOee());
-            setTimer(OEE_DATA_FETCH_INTERVAL);
+        }else if (timer > 0 && currentFace==='back') {
+            setIsFetch(true);
         }
 
     },[timer]);
 
-    useEffect(()=> {
-        //setIsFetch(timer <= 0);
-        if(fetchCurrentError === null &&  currentOeeData) {
-            flipStarter(currentFace, setFace, timer, setTimer);
+    useEffect(() =>{
+        if(currentOeeData) {
+            setTimer(OEE_DATA_FETCH_INTERVAL);
         }
+    }, [currentOeeData]);
 
+    useEffect(()=> {
         
+        if (currentOeeData && fetchCurrentError === null) {
+            flipFaces();
+        }
+        return () => clearTimeout(timeOutRef.current);
+    }, [currentFace, fetchCurrentError, currentOeeData])
 
-    }, [currentFace, fetchCurrentError, currentOeeData, timer])
 
-
+    console.log("CURRENT DATA: ", currentOeeData);
     return (
         <main>
-            {fetchCurrentStatus === 'fetching'? <Spinner /> : fetchCurrentError? <ErrorMessage error={fetchCurrentError} /> : currentOeeData?
+            {fetchCurrentStatus === 'fetching'? <Spinner /> : fetchCurrentError? <ErrorMessage error={fetchCurrentError} /> :
             
             (
                 <div className="h-100 container-fluid">
@@ -66,55 +72,59 @@ function Main() {
                             <FlipCardFront data={currentOeeData} />
 
                             {/* <!-- flip-card-back --> */}
-                            <FlipCardBack isFetch={isFetch} />
+                            <FlipCardBack isFetch={isFetch} setIsFetch={setIsFetch} />
 
                         </div>
                     </div>
                 </div>
-            ) : null
+            )
             
             }
 
 
         </main>
     );
+
+
+    function flipFaces() {
+        // console.log("Flip Starter invoked...");
+    
+        const inner_card = document.getElementById("rotating");
+        const back_face = document.getElementById("back-face");
+    
+        const timeOut = currentFace === 'front' ? FRONT_FACE_TIME : BACK_FACE_TIME;
+    
+        timeOutRef.current = setTimeout(() => {
+
+            const screenWidth = window.innerWidth;
+            const screenHeight = window.innerHeight;
+            
+            const rotationAxis = (screenWidth <= 576 || screenHeight < 420) ?
+                'Y' : 'X';
+
+            back_face.style.transform = `rotate${rotationAxis}(180deg)`; // it is always flipped with regards to the rotation axis.
+
+            if(currentFace === 'front') {
+                inner_card.style.transform = `rotate${rotationAxis}(180deg)`;
+                setFace('back')
+            }else {
+                inner_card.style.transform = `rotate${rotationAxis}(0deg)`;
+                setFace('front')
+            }
+
+            setTimer(timer => timer - timeOut);
+
+        }, timeOut);
+        // console.log("Timer: ", timer);
+    
+    
+    }
+
+
 }
 
 export default Main;
 
 
 
-function flipStarter(currentFace, setFace, timer, setTimer) {
-    // console.log("Flip Starter invoked...");
 
-    const inner_card = document.getElementById("rotating");
-    const back_face = document.getElementById("back-face");
-
-    const timeOut = currentFace === 'front' ? FRONT_FACE_TIME : BACK_FACE_TIME;
-
-    setTimeout(()=> {
-        // console.log("Flipping...");
-
-        const screenWidth = window.innerWidth;
-        const screenHeight = window.innerHeight;
-        
-        const rotationAxis = (screenWidth <= 576 || screenHeight < 420) ?
-            'Y' : 'X';
-
-        back_face.style.transform = `rotate${rotationAxis}(180deg)`; // it is always flipped with regards to the rotation axis.
-
-        if(currentFace === 'front') {
-            inner_card.style.transform = `rotate${rotationAxis}(180deg)`;
-            setFace('back')
-        }else {
-            inner_card.style.transform = `rotate${rotationAxis}(0deg)`;
-            setFace('front')
-        }
-
-        // console.log("Timer: ", timer);
-
-        setTimer(timer => timer - timeOut);
-
-    }, timeOut);
-
-}

@@ -3,7 +3,7 @@ import { getOeeGraphData } from "../../api-consumer/oeeGraphDataConsumer";
 
 // create Asynchron Thunk for fetching oee graph data:
 export const fetchGraphData = createAsyncThunk(
-    'table/fetch-current-oee-data',
+    'graph/fetch-graph-oee-data',
     async () => {
         return getOeeGraphData()
         .then(response => response)

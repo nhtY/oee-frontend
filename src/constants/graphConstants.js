@@ -5,6 +5,11 @@ export const OPTIONS = {
     plugins: {
       legend: {
         position: 'top',
+        labels: {
+          font: {
+            size: 16
+          }
+        }
       },
       title: {
         display: true,

@@ -1,4 +1,5 @@
 
+// TODO: Type isimlerini bu dosya içinde const bir array ya da object içinde tanımla... Manuel değer girmelerden kaçın.
 
 function FlipCardFront({data}) {
 
