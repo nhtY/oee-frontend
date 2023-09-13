@@ -1,9 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit"
+import { getOeeGraphData } from "../../api-consumer/oeeGraphDataConsumer";
 
-
+// create Asynchron Thunk for fetching oee graph data:
+export const fetchGraphData = createAsyncThunk(
+    'table/fetch-current-oee-data',
+    async () => {
+        return getOeeGraphData()
+        .then(response => response)
+    }
+);
 
 const initialState = {
-    fetchError: null,
+    error: null,
     fetching: 'idle',
 
     totalElements: 0, // max 12 = page size, but can be smaller than 12.
@@ -18,6 +26,20 @@ const graphSlice = createSlice({
 
     },
     extraReducers: (builder) =>{
-        
+        builder.addCase(fetchGraphData.fulfilled, (state, action) => {
+            state.totalElements = action.payload.totalElements;
+            state.content = action.payload.content;
+            state.fetching = 'idle';
+        });
+
+        builder.addCase(fetchGraphData.pending, (state, action) => {
+            state.fetching = 'fetching';
+            state.error = null;
+        });
+
+        builder.addCase(getOeeGraphData.rejected, (state, action) => {
+            state.error = action.error.message;
+            state.fetching = 'idle';
+        });
     }
 });
