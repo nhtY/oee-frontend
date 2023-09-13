@@ -9,6 +9,10 @@ import {
     Legend,
   } from 'chart.js';
   import { Line } from 'react-chartjs-2';
+import { FONT_PERCENTAGE, OPTIONS } from '../constants/graphConstants';
+
+
+
 
 function OeeGraph() {
 
@@ -22,25 +26,8 @@ function OeeGraph() {
         Legend
       );
 
-      ChartJS.defaults.font.size = getVw_Vh().vw * 0.03;
+      ChartJS.defaults.font.size = getVw_Vh().vw * FONT_PERCENTAGE;
       
-       const options = {
-        responsive: true,
-        plugins: {
-          legend: {
-            position: 'top',
-          },
-          title: {
-            display: true,
-            text: 'Son 1 Saatlik OEE Değişimi',
-          },
-        },
-        scales: {
-            x: {
-                display: false
-            }
-        }
-      };
       
       const labels = range(0, 12, 1);
       
@@ -64,7 +51,7 @@ function OeeGraph() {
 
 
     return (
-        <Line className='w-100' options={options} data={data} />
+        <Line className='w-100' options={OPTIONS} data={data} />
     );
 }
 
