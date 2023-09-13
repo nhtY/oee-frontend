@@ -132,11 +132,15 @@ main {
 
 @media only screen and (min-width: 1024px) {
   #upper h1 {
-      font-size: 8.0vmin;
+      font-size: 7.5vmin;
   }
 
   .type, .value {
       font-size: 6.0vmin;
+  }
+
+  .type-long {
+    font-size: 5vmin;
   }
 
 }
