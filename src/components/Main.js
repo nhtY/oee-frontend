@@ -8,6 +8,7 @@ import { OEE_DATA_FETCH_INTERVAL } from "../constants/fetchIntervals";
 import {fetchCurrentOee} from '../features/oee-table/oeeTableSlice';
 import Spinner from "./Spinner";
 import ErrorMessage from "./ErrorMessage";
+import { fetchGraphData } from "../features/oee-graph/oeeGraphSlice";
 
 function Main() {
 
@@ -15,33 +16,38 @@ function Main() {
     const fetchCurrentError = useAppSelector(state => state.table.error);
     const fetchCurrentTriggered = useAppSelector(state => state.table.fetchTriggered);
     const currentOeeData = useAppSelector(state => state.table.currentOeeData);
+    const graphContent = useAppSelector(state => state.graph.content);
 
     const [timer, setTimer] = useState(0);
+    const [isFetch, setIsFetch] = useState(true);
 
     const dispatch = useAppDispatch();
 
     const [currentFace, setFace] = useState("front");
 
     useEffect(() => {
-
-        if(timer <= 0 && fetchCurrentStatus === 'idle') {
+        console.log("TIMER: ", timer);
+        if(timer <= 0 && fetchCurrentStatus === 'idle' ) {
             dispatch(fetchCurrentOee());
             setTimer(OEE_DATA_FETCH_INTERVAL);
         }
 
-    },[timer, fetchCurrentTriggered, fetchCurrentStatus]);
+    },[timer]);
 
     useEffect(()=> {
-        if(fetchCurrentError === null) {
-            console.log("flip starter HERE CALLED")
+        //setIsFetch(timer <= 0);
+        if(fetchCurrentError === null &&  currentOeeData) {
             flipStarter(currentFace, setFace, timer, setTimer);
         }
-    }, [currentFace, fetchCurrentError])
+
+        
+
+    }, [currentFace, fetchCurrentError, currentOeeData, timer])
 
 
     return (
         <main>
-            {(fetchCurrentStatus=== 'fetching' && currentOeeData=== null)? <Spinner /> : fetchCurrentError? <ErrorMessage error={fetchCurrentError} /> :
+            {fetchCurrentStatus === 'fetching'? <Spinner /> : fetchCurrentError? <ErrorMessage error={fetchCurrentError} /> : currentOeeData?
             
             (
                 <div className="h-100 container-fluid">
@@ -60,12 +66,12 @@ function Main() {
                             <FlipCardFront data={currentOeeData} />
 
                             {/* <!-- flip-card-back --> */}
-                            <FlipCardBack />
+                            <FlipCardBack isFetch={isFetch} />
 
                         </div>
                     </div>
                 </div>
-            )
+            ) : null
             
             }
 
@@ -79,7 +85,7 @@ export default Main;
 
 
 function flipStarter(currentFace, setFace, timer, setTimer) {
-    console.log("Flip Starter invoked...");
+    // console.log("Flip Starter invoked...");
 
     const inner_card = document.getElementById("rotating");
     const back_face = document.getElementById("back-face");
@@ -87,7 +93,7 @@ function flipStarter(currentFace, setFace, timer, setTimer) {
     const timeOut = currentFace === 'front' ? FRONT_FACE_TIME : BACK_FACE_TIME;
 
     setTimeout(()=> {
-        console.log("Flipping...");
+        // console.log("Flipping...");
 
         const screenWidth = window.innerWidth;
         const screenHeight = window.innerHeight;
@@ -105,7 +111,7 @@ function flipStarter(currentFace, setFace, timer, setTimer) {
             setFace('front')
         }
 
-        console.log("Timer: ", timer);
+        // console.log("Timer: ", timer);
 
         setTimer(timer => timer - timeOut);
 
