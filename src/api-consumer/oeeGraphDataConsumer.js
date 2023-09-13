@@ -1,5 +1,5 @@
 import { BASE_URL, LAST_TWELVE_PATH } from "../constants/apiUrl";
-
+import axios from "axios";
 
 export const getOeeGraphData = async () => {
    
