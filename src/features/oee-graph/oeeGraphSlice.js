@@ -43,3 +43,7 @@ const graphSlice = createSlice({
         });
     }
 });
+
+export const {} = graphSlice.actions;
+
+export default graphSlice.reducer;
