@@ -4,7 +4,7 @@ import graphReducer from '../features/oee-graph/oeeGraphSlice';
 
 export const store = configureStore({
     reducer: {
-        table: tableReducer
-
+        table: tableReducer,
+        graph: graphReducer
     }
 });
