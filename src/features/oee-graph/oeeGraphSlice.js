@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import { getOeeGraphData } from "../../api-consumer/oeeGraphDataConsumer";
 
 // create Asynchron Thunk for fetching oee graph data:
@@ -11,8 +11,8 @@ export const fetchGraphData = createAsyncThunk(
 );
 
 const initialState = {
-    error: null,
-    fetching: 'idle',
+    graphFetchError: null,
+    graphDataFetching: 'idle',
 
     totalElements: 0, // max 12 = page size, but can be smaller than 12.
     content: null,
@@ -37,7 +37,7 @@ const graphSlice = createSlice({
             state.error = null;
         });
 
-        builder.addCase(getOeeGraphData.rejected, (state, action) => {
+        builder.addCase(fetchGraphData.rejected, (state, action) => {
             state.error = action.error.message;
             state.fetching = 'idle';
         });
