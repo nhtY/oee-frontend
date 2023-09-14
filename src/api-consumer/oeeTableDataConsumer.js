@@ -24,7 +24,7 @@ export const getCurrentOeeTableData = async () => {
 
     return axiosInstance.get(CURRENT_DATA_PATH)
         .then(response => {
-            console.log("FETCH current oee table data RESPONSE: ", response);
+            // console.log("FETCH current oee table data RESPONSE: ", response);
             return response.data;
         }).catch(err => {
             console.log("FETCH current oee table data ERROR: ", err);

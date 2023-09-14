@@ -20,9 +20,9 @@ function FlipCardBack({isFetch, setIsFetch}) {
     const dispatch = useAppDispatch();
 
     useEffect(() => {   
-        console.log("USE EFFECT HERE... " + fetch + ", " + fetching + ", " + content);
+        // console.log("USE EFFECT HERE... " + fetch + ", " + fetching + ", " + content);
         if(fetch===true && fetching === 'idle') {
-            console.log("HERE fetch graph data");
+            // console.log("HERE fetch graph data");
             dispatch(fetchGraphData());
             setFetch(false);
             setIsFetch(false);

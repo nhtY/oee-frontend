@@ -25,7 +25,7 @@ function Main() {
     const timeOutRef = useRef(null);
 
     useEffect(() => {
-        console.log("TIMER: ", timer);
+        // console.log("TIMER: ", timer);
         
         if(timer <= 0 && fetchCurrentStatus === 'idle' ) {
             dispatch(fetchCurrentOee());
@@ -50,7 +50,7 @@ function Main() {
     }, [currentFace, fetchCurrentError, currentOeeData])
 
 
-    console.log("CURRENT DATA: ", currentOeeData);
+    // console.log("CURRENT DATA: ", currentOeeData);
     return (
         <main>
             {fetchCurrentStatus === 'fetching'? <Spinner /> : fetchCurrentError? <ErrorMessage error={fetchCurrentError} /> :

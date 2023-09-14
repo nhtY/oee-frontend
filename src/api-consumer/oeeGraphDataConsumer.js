@@ -7,7 +7,7 @@ export const getOeeGraphData = async () => {
 
     return axiosInstance.get(LAST_TWELVE_PATH)
         .then(response => {
-            console.log("FETCH Oee Graph Data RESPONSE: ", response);
+            // console.log("FETCH Oee Graph Data RESPONSE: ", response);
             return response.data;
         }).catch(err => {
             console.log("FETCH Oee Graph Data ERROR: ", err);

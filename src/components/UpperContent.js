@@ -2,8 +2,8 @@
 
 function UpperContent({data}) {
 
-    console.log("DATA: ", data);
-    console.log("UPPER: ", data&& data.goee1s);
+    // console.log("DATA: ", data);
+    // console.log("UPPER: ", data&& data.goee1s);
     
     return (
         <div className="row h-100 px-0 text-center justify-content-between align-items-center align-items-sm-stretch">
