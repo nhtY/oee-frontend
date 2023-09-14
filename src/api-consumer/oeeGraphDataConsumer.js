@@ -1,11 +1,11 @@
-import { BASE_URL, LAST_TWELVE_PATH } from "../constants/apiUrl";
-import axios from "axios";
+import { LAST_TWELVE_PATH } from "../constants/apiUrl";
+import {axiosInstance} from "./interceptor";
 
 export const getOeeGraphData = async () => {
    
     console.log("Fetch Oee Graph Data in API consumer...");
 
-    return axios.get(BASE_URL.concat(LAST_TWELVE_PATH))
+    return axiosInstance.get(LAST_TWELVE_PATH)
         .then(response => {
             console.log("FETCH Oee Graph Data RESPONSE: ", response);
             return response.data;
