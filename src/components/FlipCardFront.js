@@ -1,5 +1,13 @@
 
 // TODO: Type isimlerini bu dosya içinde const bir array ya da object içinde tanımla... Manuel değer girmelerden kaçın.
+const FIELD_NAMES = {
+    ttGp: "TT-GP",
+    ttGg: "TT-GG",
+    tt1s: "TT-1S",
+    redTamir: "Red/Tamir",
+    farkliUrun: "Farklı Ürün",
+    urunGrubu: "Ürün Grubu"
+}
 
 function FlipCardFront({data}) {
 
@@ -8,7 +16,7 @@ function FlipCardFront({data}) {
                         
             {/* <!-- TT-GP --> */}
             <div className="col-sm-5 py-2">
-                <span className="type">TT-GP</span><span className="value">{data && data.ttGp}</span>
+                <span className="type">{FIELD_NAMES.ttGp}</span><span className="value">{data && data.ttGp}</span>
             </div>
 
             <div className="col-12 d-block d-sm-none">
@@ -17,7 +25,7 @@ function FlipCardFront({data}) {
 
             {/* <!-- TT-GG --> */}
             <div className="col-sm-5 py-2">
-                <span className="type">TT-GG</span><span className="value">{data && data.ttGg}</span>
+                <span className="type">{FIELD_NAMES.ttGg}</span><span className="value">{data && data.ttGg}</span>
             </div>
 
             <div className="col-12">
@@ -26,7 +34,7 @@ function FlipCardFront({data}) {
 
             {/* <!-- TT-1S --> */}
             <div className="col-sm-5 py-2">
-                <span className="type">TT-1S</span><span className="value">{data && data.tt1s}</span>
+                <span className="type">{FIELD_NAMES.tt1s}</span><span className="value">{data && data.tt1s}</span>
             </div>
 
             <div className="col-12 d-block d-sm-none">
@@ -35,7 +43,7 @@ function FlipCardFront({data}) {
 
             {/* <!-- Red/Tamir --> */}
             <div className="col-sm-5 py-2">
-                <span className="type type-long">Red/Tamir</span><span className="value">{data && data.redTamir}</span>
+                <span className="type type-long">{FIELD_NAMES.redTamir}</span><span className="value">{data && data.redTamir}</span>
             </div>
 
             <div className="col-12">
@@ -44,7 +52,7 @@ function FlipCardFront({data}) {
             
             {/* <!-- Farklı Ürün --> */}
             <div className="col-sm-5 py-2">
-                <span className="type type-long">Farklı Ürün</span>
+                <span className="type type-long">{FIELD_NAMES.farkliUrun}</span>
                 <span className="value">{data && data.farkliUrun}</span>
             </div>
 
@@ -54,7 +62,7 @@ function FlipCardFront({data}) {
 
             {/* <!-- Ürün Grubu --> */}
             <div className="col-sm-5 py-2">
-                <span className="type type-long">Ürün Grubu</span><span className="value">{data && data.urunGrubu}</span>
+                <span className="type type-long">{FIELD_NAMES.urunGrubu}</span><span className="value">{data && data.urunGrubu}</span>
             </div>
         </div>
     );
