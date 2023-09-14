@@ -9,6 +9,8 @@ function Nav() {
         minute: '00'
     }); 
 
+    const [currentTime, setCurrentTime] = useState(formatedTime(new Date()))
+
     useEffect(() => {
 
         if(fetchCurrentStatus === 'fetching') {
@@ -16,6 +18,12 @@ function Nav() {
         }
 
     }, [fetchCurrentStatus]);
+
+    useEffect(() => {
+        const interval = setInterval(() => setCurrentTime(new Date()), 30000); // for every 30 seconds
+
+        return () => clearInterval(interval);
+    });
 
     function formatedTime(date) {
         let hour = '';
@@ -43,7 +51,9 @@ function Nav() {
         <nav>
             <div className="container-fluid h-100 text-white p-0">
                 <div className="row h-100 w-100 align-items-center">
-                    <div className="col col-md-2"></div>
+                    <div className="col col-md-2 nav-text">
+                        <span>{currentTime.hour}: {currentTime.minute}</span>
+                    </div>
                     <div className="col-auto col-md-8 text-center">
                         <div className="nav-text">Kanepe Döşeme Bandı Performans</div>
                     </div>
