@@ -14,7 +14,7 @@ import { FONT_PERCENTAGE, OPTIONS } from '../constants/graphConstants';
 
 
 
-function OeeGraph() {
+function OeeGraph({content}) {
 
     ChartJS.register(
         CategoryScale,
@@ -29,21 +29,21 @@ function OeeGraph() {
       ChartJS.defaults.font.size = getVw_Vh().vw * FONT_PERCENTAGE;
       
       
-      const labels = range(0, 12, 1);
-      
+      const labels = range(0, content.length, 1);
+
        const data = {
         labels,
         datasets: [
           {
             label: 'Hedeflenen',
-            data: labels.map(() => 60),
+            data: labels.map(() => 65),
             borderColor: 'rgb(255, 99, 132)',
             borderWidth: getVw_Vh().vw * 0.005,
             backgroundColor: 'rgba(255, 99, 132, 0.5)',
           },
           {
             label: 'Gerçekleşen',
-            data: labels.map(() => 50 + Math.random() * 20),
+            data: content.map((_, idx) => content[content.length - idx -1].ggOee),
             borderColor: 'rgb(53, 162, 235)',
             borderWidth: getVw_Vh().vw * 0.005,
             backgroundColor: 'rgba(53, 162, 235, 0.5)',

@@ -32,7 +32,7 @@ function FlipCardBack({isFetch, setIsFetch}) {
     return (
         <div id="back-face" className="row h-100 p-3 bg-bellona align-items-center shadow rounded-4 flip-card-back">
             <div id="graph" className="col h-100 bg-body p-1 align-items-center">
-                {fetching=== 'fetching'? <Spinner /> : error? <ErrorMessage error={error} /> : content? <OeeGraph /> : null}
+                {fetching=== 'fetching'? <Spinner /> : error? <ErrorMessage error={error} /> : content? <OeeGraph content={content} /> : null}
             </div>
         </div>
     );
