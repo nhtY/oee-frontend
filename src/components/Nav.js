@@ -1,6 +1,43 @@
+import { useEffect, useState } from 'react';
 import timeIcon from '../assets/time-forward_icon.svg';
+import {useAppSelector} from '../app/hooks'
 
 function Nav() {
+    const fetchCurrentStatus = useAppSelector(state => state.table.fetching);
+    const [lastFetchTime, setLastFetchTime] = useState({
+        hour: '00',
+        minute: '00'
+    }); 
+
+    useEffect(() => {
+
+        if(fetchCurrentStatus === 'fetching') {
+            setLastFetchTime(formatedTime(new Date()));
+        }
+
+    }, [fetchCurrentStatus]);
+
+    function formatedTime(date) {
+        let hour = '';
+        let minutes = '';
+
+        if (date.getHours() < 10) {
+            hour = '0' + date.getHours().toString()
+        }else {
+            hour += date.getHours().toString();
+        }
+
+        if(date.getMinutes() < 10) {
+            minutes = '0' + date.getMinutes().toString()
+        }else {
+            minutes += date.getMinutes().toString();
+        }
+
+        return {
+            hour: hour,
+            minute: minutes
+        }
+    }
 
     return (
         <nav>
@@ -11,7 +48,7 @@ function Nav() {
                         <div className="nav-text">Kanepe Döşeme Bandı Performans</div>
                     </div>
                     <div className="col col-md-2 nav-text p-0 text-center">
-                        <span>10:35 </span>
+                        <span>{lastFetchTime.hour}:{lastFetchTime.minute} </span>
                         <img className="img-responsive" src={timeIcon} alt="time icon" />
                     </div>
                 </div>
