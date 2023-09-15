@@ -52,7 +52,7 @@ function Nav() {
         <nav>
             <div className="container-fluid h-100 text-white p-0">
                 <div className="row h-100 w-100 align-items-center">
-                    <div className="col col-md-2 nav-text">
+                    <div className="col col-md-2 nav-text text-center">
                         <span className='ps-1'>{currentTime.hour}<span className='blink'>:</span>{currentTime.minute}</span>
                     </div>
                     <div className="col-auto col-md-8 text-center">
