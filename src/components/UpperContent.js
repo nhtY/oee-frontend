@@ -12,7 +12,7 @@ function UpperContent({data}) {
             <div className="col-5 bg-bellona shadow-lg rounded-4">
                 <div className="row h-100">
                     <div className="col align-self-center">
-                        <h1 className={data &&(parseInt(data.ggOee) < 65)? "blink text-danger": ""}>% {data && data.ggOee}</h1>
+                        <h1 className={data &&(parseInt(data.ggOee) < 65)? "blink text-warn": ""}>% {data && data.ggOee}</h1>
                         <h1>GG-OEE</h1>
                     </div>
                 </div>
@@ -22,7 +22,7 @@ function UpperContent({data}) {
             <div className="col-5 bg-bellona shadow-lg rounded-4">
                 <div className="row h-100">
                     <div className="col align-self-center">
-                        <h1 className={data &&(parseInt(data.ggOee) < 65)? "blink text-warning": ""}>% {data && data.goee1s}</h1>
+                        <h1 className={data &&(parseInt(data.goee1s) < 65)? "blink text-warn": ""}>% {data && data.goee1s}</h1>
                         <h1>G-OEE-1S</h1>
                     </div>
                 </div>

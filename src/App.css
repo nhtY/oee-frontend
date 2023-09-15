@@ -2,10 +2,9 @@
   background-color: hsl(182.07deg 100% 22.75%); /* #097A83; */
 }
 
-.App {
-  /* text-align: center; */
+.text-warn {
+  color: #fff700;
 }
-
 
 .App-header {
   /* background-color: #282c34; */
