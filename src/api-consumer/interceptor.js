@@ -35,18 +35,18 @@ instance.interceptors.response.use(
 */
 
 function localizeNumberFields(response) {
-    console.log("LOCALIZE..")
+    // console.log("LOCALIZE..")
 
     const requestedURL = response.request.responseURL;
     if (requestedURL.includes(CURRENT_DATA_PATH)) {
-        console.log("PATH MATHCES..")
+        // console.log("PATH MATHCES..")
         response.data.ggOee = response.data.ggOee.toLocaleString(document.documentElement.lang);
         response.data.goee1s = response.data.goee1s.toLocaleString(document.documentElement.lang);
         response.data.ttGp = response.data.ttGp.toLocaleString(document.documentElement.lang);
         response.data.ttGg = response.data.ttGg.toLocaleString(document.documentElement.lang);
         response.data.tt1s = response.data.tt1s.toLocaleString(document.documentElement.lang);
 
-        console.log("GG-OEE: ", parseFloat(response.data.ggOee));
+        // console.log("GG-OEE: ", parseFloat(response.data.ggOee));
     }
 
 }

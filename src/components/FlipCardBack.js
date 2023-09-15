@@ -8,7 +8,7 @@ import { fetchGraphData } from "../features/oee-graph/oeeGraphSlice";
 
 function FlipCardBack({isFetch, setIsFetch}) {
 
-    console.log("BACK: ", isFetch);
+    // console.log("BACK: ", isFetch);
 
     const [fetch, setFetch] = useState(isFetch);
 

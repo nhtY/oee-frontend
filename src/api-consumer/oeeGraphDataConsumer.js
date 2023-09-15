@@ -3,14 +3,14 @@ import {axiosInstance} from "./interceptor";
 
 export const getOeeGraphData = async () => {
    
-    console.log("Fetch Oee Graph Data in API consumer...");
+    // console.log("Fetch Oee Graph Data in API consumer...");
 
     return axiosInstance.get(LAST_TWELVE_PATH)
         .then(response => {
             // console.log("FETCH Oee Graph Data RESPONSE: ", response);
             return response.data;
         }).catch(err => {
-            console.log("FETCH Oee Graph Data ERROR: ", err);
+            // console.log("FETCH Oee Graph Data ERROR: ", err);
             throw err;
         });
 
