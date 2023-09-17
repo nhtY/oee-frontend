@@ -1,5 +1,6 @@
 import {axiosInstance} from './interceptor';
 import { CURRENT_DATA_PATH } from '../constants/apiUrl';
+import { getCurrent, getLastTwelve, localize } from './fakeOee';
 
 
 /*
@@ -22,13 +23,21 @@ export const getCurrentOeeTableData = async () => {
    
     // console.log("Fetch Current OEE table data in API consumer...");
 
-    return axiosInstance.get(CURRENT_DATA_PATH)
-        .then(response => {
-            // console.log("FETCH current oee table data RESPONSE: ", response);
-            return response.data;
-        }).catch(err => {
-            // console.log("FETCH current oee table data ERROR: ", err);
-            throw err;
-        });
+    
+    const promise = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve();
+        }, 400);
+    });
+
+    return promise.then(() => localize(getLastTwelve().content[11]));
+    // return axiosInstance.get(CURRENT_DATA_PATH)
+    //     .then(response => {
+    //         // console.log("FETCH current oee table data RESPONSE: ", response);
+    //         return response.data;
+    //     }).catch(err => {
+    //         // console.log("FETCH current oee table data ERROR: ", err);
+    //         throw err;
+    //     });
 
 }

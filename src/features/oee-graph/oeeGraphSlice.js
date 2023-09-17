@@ -27,8 +27,8 @@ const graphSlice = createSlice({
     },
     extraReducers: (builder) =>{
         builder.addCase(fetchGraphData.fulfilled, (state, action) => {
-            state.totalElements = action.payload.totalElements;
             state.content = action.payload.content;
+            state.totalElements = action.payload.totalElements;
             state.fetching = 'idle';
         });
 
