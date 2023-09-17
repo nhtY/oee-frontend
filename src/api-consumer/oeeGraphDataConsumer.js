@@ -1,18 +1,27 @@
 import { LAST_TWELVE_PATH } from "../constants/apiUrl";
+import { getLastTwelve } from "./fakeOee";
 import {axiosInstance} from "./interceptor";
 
 export const getOeeGraphData = async () => {
    
     // console.log("Fetch Oee Graph Data in API consumer...");
 
-    return axiosInstance.get(LAST_TWELVE_PATH)
-        .then(response => {
-            // console.log("FETCH Oee Graph Data RESPONSE: ", response);
-            return response.data;
-        }).catch(err => {
-            // console.log("FETCH Oee Graph Data ERROR: ", err);
-            throw err;
-        });
+    const promise = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve();
+        }, 400);
+    });
+
+    return promise.then(() => getLastTwelve());
+
+    // return axiosInstance.get(LAST_TWELVE_PATH)
+    //     .then(response => {
+    //         // console.log("FETCH Oee Graph Data RESPONSE: ", response);
+    //         return response.data;
+    //     }).catch(err => {
+    //         // console.log("FETCH Oee Graph Data ERROR: ", err);
+    //         throw err;
+    //     });
 
 }
 

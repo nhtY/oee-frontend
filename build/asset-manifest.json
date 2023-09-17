@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/static/css/main.196b3d5f.css",
+    "main.js": "/static/js/main.cf321e7f.js",
+    "static/media/time-forward_icon.svg": "/static/media/time-forward_icon.0f5e573267c1864fad89d01af91b5611.svg",
+    "index.html": "/index.html",
+    "main.196b3d5f.css.map": "/static/css/main.196b3d5f.css.map",
+    "main.cf321e7f.js.map": "/static/js/main.cf321e7f.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.196b3d5f.css",
+    "static/js/main.cf321e7f.js"
+  ]
+}

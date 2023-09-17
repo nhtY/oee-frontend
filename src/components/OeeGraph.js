@@ -36,14 +36,14 @@ function OeeGraph({content}) {
         datasets: [
           {
             label: 'Hedeflenen',
-            data: labels.map(() => 65),
+            data: labels.map(() => 70),
             borderColor: 'rgb(255, 99, 132)',
             borderWidth: getVw_Vh().vw * 0.005,
             backgroundColor: 'rgba(255, 99, 132, 0.5)',
           },
           {
             label: 'Gerçekleşen',
-            data: content.map((_, idx) => content[content.length - idx -1].ggOee),
+            data: content.map((oee, idx) => oee.ggOee),
             borderColor: 'rgb(53, 162, 235)',
             borderWidth: getVw_Vh().vw * 0.005,
             backgroundColor: 'rgba(53, 162, 235, 0.5)',
